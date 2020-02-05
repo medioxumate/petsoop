@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!--
+/**
+ * Pair Programming IV with Bruce Turner & Brian Kiehn
+ * GitHub Repo:https://github.com/BTurner15/pets4
+ * File: form2.html
+ * Last Modification:
+ *     - Tuesday May 7 2019
+ *     - Time: 10:12 am
+ *     - Version 3.0
+ */
+ -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>form2.html</title>
+    <link rel="stylesheet" type="text/css" href="styles/styles.css">
+</head>
+<body>
+<form action="#" method="POST">
+    <fieldset>
+        <select class="form-control" name='color' id="color">
+            <option>--Select a color--</option>
+            <repeat group="{{ @colors }}" value="{{ @colorOption }}">
+                <option>{{ @colorOption }}</option>
+            </repeat>
+        </select>
+        <check if="{{ isset(@errors['color']) }}">
+            <span class="err"> {{ @errors['color'] }}</span>
+        </check>
+    </fieldset>
+    <!-- On the second form, add a set of checkboxes. You can decide what these
+         represent, and determine your own validation rules. Make your form sticky.
+     array used:('accessories', array('one week of food', 'feeding station',
+                 'user manual', 'training & care booklet')) -->
+    <p>Accessories:
+    <check if="{{ @errors['access'] }}">
+        <span class="err">{{ @errors['access'] }}</span>
+    </check><br>
+
+    <repeat group="{{ @accessories }}" value="{{ @accessOption }}">
+        <label><input type="checkbox" name="access[]" value="{{ @accessOption }}"
+            <check if="{{ !empty(@access) && in_array(@accessOption, @access) }}">
+                checked="checked"
+            </check>
+            >{{ @accessOption }}</label><br>
+    </repeat>
+    </p>
+
+    <input type="submit" value="Place Order">
+</form>
+</body>
+</html>
